@@ -15,7 +15,7 @@ def make_message_list(message: str):
     result.append(add_space_after_url(current_string))
     return result
 
-def add_space_after_url(string):
+def add_space_after_url(string: str):
     words = string.split()
     for i, word in enumerate(words):
         if word.startswith("http://") or word.startswith("https://"):
@@ -29,9 +29,7 @@ class Not_US_or_Canada_number(Exception):
     """Custom exception for invalid US/Canada phone numbers."""
     pass
 
-def format_US_number(num):
-
-    num = str(num)
+def format_US_number(num: str):
     num = ''.join([char for char in num if char.isdigit()])
     tup_num = tuple(num)
     
