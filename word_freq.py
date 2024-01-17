@@ -50,7 +50,7 @@ def run_analysis(our_text: str, dist: list):
         brown_ngram_freq = calculate_frequencies(brown_tokens, n=n)
     
         # Compare frequencies
-        frequency_comparison = compare_frequencies(our_4gram_freq, brown_4gram_freq)
+        frequency_comparison = compare_frequencies(our_ngram_freq, brown_ngram_freq)
     
         # 4-grams used more or less in our text compared to average English
         more_used = {gram: diff for gram, diff in frequency_comparison.items() if diff > 0}
@@ -63,7 +63,7 @@ def run_analysis(our_text: str, dist: list):
 
 # Replace this with our text
 our_text = "Yo dude it's just Cole Gordon from ClosersIO how ya'll doing today"
-dist = [1,2,3,4,5,6,7,8,9,10]
+dist = [1,2,3]
 
 test = run_analysis(our_text, dist)
 print(test)
