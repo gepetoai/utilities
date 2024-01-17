@@ -5,7 +5,7 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import string
 
-# Ensure necessary NLTK datasets are downloaded
+# Ensure NLTK datasets are downloaded
 nltk.download('brown')
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -38,7 +38,7 @@ def compare_frequencies(custom_freq, reference_freq):
 # Replace this with our text
 our_text = "Yo dude it's just Cole Gordon from ClosersIO how ya'll doing today"
 
-# Preprocess your text and the Brown corpus
+# Preprocess our text and the Brown corpus
 our_tokens = preprocess(our_text)
 brown_tokens = preprocess(' '.join(brown.words()))
 
@@ -52,7 +52,7 @@ for n in dist:
     # Compare frequencies
     frequency_comparison = compare_frequencies(our_4gram_freq, brown_4gram_freq)
 
-    # 4-grams used more or less in your text compared to average English
+    # 4-grams used more or less in our text compared to average English
     more_used = {gram: diff for gram, diff in frequency_comparison.items() if diff > 0}
     less_used = {gram: diff for gram, diff in frequency_comparison.items() if diff < 0}
 
