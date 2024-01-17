@@ -35,26 +35,35 @@ def compare_frequencies(custom_freq, reference_freq):
         comparison[item] = custom_rate - reference_rate
     return comparison
 
+def run_analysis(our_text: str, dist: list):
+    """Output a list of n-gram more and less used where dist is a list of n."""
+    # Preprocess our text and the Brown corpus
+    our_tokens = preprocess(our_text)
+    brown_tokens = preprocess(' '.join(brown.words()))
+    
+    #initialize output
+    final_output = []
+    
+    for n in dist:
+        # Calculate frequencies for n-grams
+        our_ngram_freq = calculate_frequencies(our_tokens, n=n)
+        brown_ngram_freq = calculate_frequencies(brown_tokens, n=n)
+    
+        # Compare frequencies
+        frequency_comparison = compare_frequencies(our_4gram_freq, brown_4gram_freq)
+    
+        # 4-grams used more or less in our text compared to average English
+        more_used = {gram: diff for gram, diff in frequency_comparison.items() if diff > 0}
+        less_used = {gram: diff for gram, diff in frequency_comparison.items() if diff < 0}
+    
+        n_output = {n: {'more': more_used, 'less': less_used}}
+        final_output.append(n_output)
+        
+    return final_output
+
 # Replace this with our text
 our_text = "Yo dude it's just Cole Gordon from ClosersIO how ya'll doing today"
-
-# Preprocess our text and the Brown corpus
-our_tokens = preprocess(our_text)
-brown_tokens = preprocess(' '.join(brown.words()))
-
 dist = [1,2,3,4,5,6,7,8,9,10]
 
-for n in dist:
-    # Calculate frequencies for n-grams
-    our_4gram_freq = calculate_frequencies(our_tokens, n=n)
-    brown_4gram_freq = calculate_frequencies(brown_tokens, n=n)
-
-    # Compare frequencies
-    frequency_comparison = compare_frequencies(our_4gram_freq, brown_4gram_freq)
-
-    # 4-grams used more or less in our text compared to average English
-    more_used = {gram: diff for gram, diff in frequency_comparison.items() if diff > 0}
-    less_used = {gram: diff for gram, diff in frequency_comparison.items() if diff < 0}
-
-    print("{n}-grams Used More in Our Text:\n", more_used)
-    print("\n{n}-grams Used Less in Our Text:\n", less_used)
+test = run_analysis(our_text, dist)
+print(test)
